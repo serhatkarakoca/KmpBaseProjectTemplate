@@ -16,7 +16,7 @@ internal class RemoteDataSource(private val api: ApiService, private val dispatc
     }.handleResourceFlow()
 
 
-    private fun <V, T : V> Flow<Resource<T>>.handleResourceFlow(): Flow<Resource<V>> =
+    private fun <T> Flow<Resource<T>>.handleResourceFlow(): Flow<Resource<T>> =
         onStart { emit(Resource.Loading) }
             .map {
                 when (it) {
