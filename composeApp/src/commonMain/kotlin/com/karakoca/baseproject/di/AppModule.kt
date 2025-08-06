@@ -17,8 +17,8 @@ import org.koin.dsl.module
 
 
 val dataModule = module {
-    factory { RemoteDataSource(get(), get()) }
-    factory { ApiService() }
+    single { RemoteDataSource(get(), get()) }
+    single { ApiService() }
 }
 
 val domainModule = module {
@@ -29,7 +29,7 @@ val domainModule = module {
 
     //viewModels
     viewModel { HomeViewModel(get(), get(), get()) }
-    viewModel { FavoriteViewModel() }
+    viewModel { FavoriteViewModel(get()) }
 }
 
 val platformModule = module {

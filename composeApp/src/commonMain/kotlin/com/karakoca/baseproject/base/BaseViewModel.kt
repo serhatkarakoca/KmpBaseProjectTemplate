@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
@@ -40,8 +41,8 @@ abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
         }
     }
 
-    fun setState(state: STATE) {
-        viewModelScope.launch { _state.emit(state) }
+    fun updateState(state: STATE) {
+        viewModelScope.launch { _state.update { state } }
     }
 
     fun setEvent(event: EVENT) {
@@ -54,7 +55,7 @@ abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
         viewModelScope.launch { _loading.emit(value) }
     }
 
-    inline fun <reified T> Flow<Resource<T>>.sendRequest(
+    inline fun <T> Flow<Resource<T>>.sendRequest(
         showProgress: Boolean = true,
         crossinline onComplete: (T) -> Unit,
         crossinline onError: (Throwable) -> Unit
@@ -79,7 +80,7 @@ abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
         }.launchIn(viewModelScope)
     }
 
-    inline fun <reified T> Flow<Resource<T>>.sendRequest(
+    inline fun <T> Flow<Resource<T>>.sendRequest(
         showProgress: Boolean = true,
         crossinline onComplete: (T) -> Unit
     ) {

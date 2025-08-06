@@ -1,4 +1,4 @@
-package com.karakoca.baseproject.presentation.home
+package com.karakoca.baseproject.presentation.favorite
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -9,14 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,8 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import co.touchlab.kermit.Logger
-import com.karakoca.baseproject.domain.model.Results
+import com.karakoca.baseproject.data.model.local.FavMovie
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import kmpbaseproject.composeapp.generated.resources.Res
@@ -36,30 +32,21 @@ import kmpbaseproject.composeapp.generated.resources.compose_multiplatform
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MovieItem(item: Results, favClick: (Results) -> Unit) {
-    val isFavorite = remember { mutableStateOf(item.isFavorite) }
-
+fun FavItem(item: FavMovie, favClick: (FavMovie) -> Unit) {
     Box {
         IconButton(onClick = {
-            isFavorite.value = !isFavorite.value
-            item.isFavorite = isFavorite.value
             favClick.invoke(item)
-
         }, modifier = Modifier.align(Alignment.TopEnd).zIndex(4f)) {
-            if (isFavorite.value)
-                Icon(Icons.Default.Favorite, contentDescription = null, tint = Color.Red)
-            else
-                Icon(Icons.Default.FavoriteBorder, contentDescription = null)
+            Icon(Icons.Default.Favorite, contentDescription = null, tint = Color.Red)
         }
 
         Column {
             Card(shape = RoundedCornerShape(8.dp), modifier = Modifier) {
                 KamelImage(
-                    resource = { asyncPainterResource(item.posterPath ?: "") },
+                    resource = { asyncPainterResource(item.image) },
                     contentDescription = item.title + "image",
                     contentScale = ContentScale.Crop,
                     onFailure = {
-                        Logger.e("KERMIT", it)
                         Image(
                             painterResource(Res.drawable.compose_multiplatform),
                             contentDescription = "logo",

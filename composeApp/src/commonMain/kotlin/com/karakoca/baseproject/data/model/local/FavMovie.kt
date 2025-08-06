@@ -7,5 +7,7 @@ import androidx.room.PrimaryKey
 data class FavMovie(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val title: String
+    val movieId: Int,
+    val title: String,
+    val image: String
 )

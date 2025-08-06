@@ -1,42 +1,43 @@
 [versions]
-agp = "8.2.2"
+agp = "8.8.2"
 android-compileSdk = "35"
-android-minSdk = "24"
+android-minSdk = "28"
 android-targetSdk = "35"
-androidx-activityCompose = "1.9.3"
-androidx-appcompat = "1.7.0"
-androidx-constraintlayout = "2.2.0"
-androidx-core-ktx = "1.15.0"
+androidx-activityCompose = "1.10.1"
+androidx-appcompat = "1.7.1"
+androidx-constraintlayout = "2.2.1"
+androidx-core-ktx = "1.16.0"
 androidx-espresso-core = "3.6.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
-compose-plugin = "1.7.1"
+compose-plugin = "1.8.2"
 junit = "4.13.2"
-kotlin = "2.1.0"
+kotlin = "2.2.0"
 
-ktor = "2.3.12"
-kamel = "0.9.5"
-kotlinx-coroutines = "1.7.3"
-koin = "3.6.0-Beta4"
-koinComposeMultiplatform = "1.2.0-Beta4"
-libraryVersion = "3.5.2"
-navigationCompose = "2.8.0-alpha08"
-lifecycleViewModel = "2.8.7"
-previewVersion = "1.7.1"
-androidx-data-store = "1.1.1"
+ktor = "3.2.3"
+kamel = "1.0.7"
+kotlinx-coroutines = "1.10.2"
+koin = "4.1.0"
+koinComposeMultiplatform = "4.1.0"
+libraryVersion = "4.2.0"
+navigationCompose = "2.8.0-alpha13"
+lifecycleViewModel = "2.9.2"
+previewVersion = "1.8.2"
+androidx-data-store = "1.1.4"
 androidx-startup = "1.2.0"
-room = "2.7.0-alpha12"
-ksp = "2.1.0-1.0.29"
-sqlite = "2.5.0-alpha12"
-dateTime = "0.6.0"
+room = "2.7.1"
+ksp = "2.1.20-2.0.1"
+sqlite = "2.5.0"
+dateTime = "0.7.1"
 accompanistPermissionsVersion = "0.33.2-alpha"
-firebase-android-bom = "33.7.0"
-gradlePlugins-crashlytics = "3.0.2"
-gradlePlugins-google-services = "4.4.2"
-work_version = "2.10.0"
-shimmer_version = "1.3.0"
-kermit_version = "2.0.4"
-gradle-buildconfig-plugin = "5.4.0"
+firebase-android-bom = "33.12.0"
+gradlePlugins-crashlytics = "3.0.5"
+gradlePlugins-google-services = "4.4.3"
+work_version = "2.10.3"
+shimmer_version = "1.3.3"
+kermit_version = "2.0.6"
+gradle-buildconfig-plugin = "5.6.7"
+material_icons = "1.7.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -49,7 +50,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
-kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+kamel = { module = "media.kamel:kamel-image-default", version.ref = "kamel" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 compose-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "previewVersion" }
 
@@ -89,6 +90,7 @@ firebase-android-firestore = { module = "com.google.firebase:firebase-firestore"
 androidx-workmanager = { module = "androidx.work:work-runtime-ktx", version.ref = "work_version" }
 kmp-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "shimmer_version" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit_version" }
+material-icons = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "material_icons" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

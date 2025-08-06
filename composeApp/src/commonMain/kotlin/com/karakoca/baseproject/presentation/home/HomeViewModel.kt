@@ -28,11 +28,6 @@ class HomeViewModel(
             when (event) {
                 is HomeEvent.GetMovies -> getMovies()
             }
-            dao.getAllFavoriteMovies().collect {
-                Logger.d("ROOM") {
-                    it.toString()
-                }
-            }
         }
     }
 
@@ -56,7 +51,7 @@ class HomeViewModel(
         getMoviesUseCase.invoke(page).sendRequest(onComplete = {
             val movieList = it.results?.mapNotNull { item -> item } ?: emptyList()
             val finalMovieList = if (page == 0) movieList else getCurrentState().movies + movieList
-            setState(
+            updateState(
                 getCurrentState().copy(
                     movies = finalMovieList,
                     loadFinished = movieList.size < 20
@@ -69,13 +64,29 @@ class HomeViewModel(
     }
 
     fun setLoadingState(value: Boolean) {
-        setState(getCurrentState().copy(isLoading = value))
+        updateState(getCurrentState().copy(isLoading = value))
     }
 
     fun upsert(mov: Results) {
         viewModelScope.launch {
-            val favMovie = FavMovie(title = mov.title ?: "")
-            dao.upsert(favMovie)
+            if (dao.getFavoriteMovie(mov.id ?: 0) == null) {
+                val favMovie = FavMovie(
+                    movieId = mov.id ?: 0,
+                    title = mov.title ?: "",
+                    image = mov.posterPath.toString()
+                )
+                dao.upsert(favMovie)
+                mov.isFavorite = true
+            }
+        }
+    }
+
+    fun deleteFav(mov: Results) {
+        viewModelScope.launch {
+            val favMovie = dao.getFavoriteMovie(mov.id ?: 0)
+            favMovie?.let { fav ->
+                dao.delete(fav)
+            }
         }
     }
 }

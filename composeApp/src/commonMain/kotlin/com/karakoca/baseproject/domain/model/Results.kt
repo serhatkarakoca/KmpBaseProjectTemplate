@@ -9,5 +9,6 @@ data class Results(
     val posterPath: String?,
     val releaseDate: String?,
     val title: String?,
-    val voteAverage: Double?
+    val voteAverage: Double?,
+    var isFavorite: Boolean = false
 )

@@ -51,8 +51,11 @@ fun HomeScreenMain(viewModel: HomeViewModel) {
             state = gridState
         ) {
             itemsIndexed(state.movies, key = { it, it2 -> it2.id ?: it }) { index, item ->
-                MovieItem(item) {
-                    viewModel.upsert(it)
+                MovieItem(item) { movie ->
+                    if (movie.isFavorite)
+                        viewModel.upsert(movie)
+                    else
+                        viewModel.deleteFav(movie)
                 }
 
                 if (index >= state.movies.lastIndex && !state.isLoading && !state.loadFinished)
