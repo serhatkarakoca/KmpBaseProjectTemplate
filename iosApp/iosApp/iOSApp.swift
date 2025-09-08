@@ -1,10 +1,11 @@
 import SwiftUI
-import FirebaseCore
+
+//import FirebaseCore
 
 @main
 struct iOSApp: App {
     init() {
-        FirebaseApp.configure()
+        //FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
