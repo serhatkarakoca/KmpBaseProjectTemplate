@@ -32,7 +32,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -87,13 +86,21 @@ kotlin {
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
             implementation(libs.kermit)
+            implementation(libs.haze)
+            implementation(libs.haze.materials)
+            implementation(libs.lottie)
+            implementation(libs.gitlive.analytics)
+            implementation(libs.gitlive.auth)
+            implementation(libs.gitlive.storage)
             implementation(libs.material.icons)
+            api(libs.compose.webview.multiplatform)
         }
     }
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         // Common compiler options applied to all Kotlin source sets
         freeCompilerArgs.add("-Xexpect-actual-classes")
+        optIn.add("kotlin.time.ExperimentalTime")
     }
 }
 
@@ -173,7 +180,6 @@ dependencies {
 
     add("kspAndroid", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
-    add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)
 
 
