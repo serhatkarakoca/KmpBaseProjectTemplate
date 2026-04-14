@@ -66,7 +66,7 @@ fun FavItem(item: FavMovie, favClick: (FavMovie) -> Unit) {
             }
 
             Text(
-                item.title.toString(),
+                item.title,
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
                 textAlign = TextAlign.Center,
                 maxLines = 1,

@@ -11,9 +11,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ShortNavigationBar
+import androidx.compose.material3.ShortNavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -73,13 +73,12 @@ fun MainNavController() {
                 }
             })
     }, bottomBar = {
-        NavigationBar(
-
+        ShortNavigationBar(
             contentColor = Color.LightGray,
             containerColor = MaterialTheme.colorScheme.background
         ) {
             bottomNavigations.forEachIndexed { _, destination ->
-                NavigationBarItem(
+                ShortNavigationBarItem(
                     icon = {
                         destination.icon?.let { it1 ->
                             Icon(
@@ -88,7 +87,6 @@ fun MainNavController() {
                             )
                         }
                     },
-                    alwaysShowLabel = false,
                     label = {
                         Text(stringResource(resource = destination.title))
                     },
