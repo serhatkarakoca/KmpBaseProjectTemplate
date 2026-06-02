@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
+abstract class BaseViewModel<STATE : State, EVENT : Event, EFFECT : Effect> : ViewModel() {
     private val initialState: STATE by lazy { setInitialState() }
 
     abstract fun setInitialState(): STATE
@@ -27,6 +27,9 @@ abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
 
     private val _event: MutableSharedFlow<EVENT> = MutableSharedFlow()
     val event: SharedFlow<EVENT> = _event.asSharedFlow()
+
+    private val _effect: MutableSharedFlow<EFFECT> = MutableSharedFlow()
+    val effect: SharedFlow<EFFECT> = _effect.asSharedFlow()
 
     private val _loading = MutableStateFlow(false)
     val loadingState = _loading.asStateFlow()
@@ -47,6 +50,10 @@ abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
 
     fun setEvent(event: EVENT) {
         viewModelScope.launch { _event.emit(event) }
+    }
+
+    fun setEffect(effect: EFFECT) {
+        viewModelScope.launch { _effect.emit(effect) }
     }
 
     fun getCurrentState() = state.value
@@ -106,3 +113,4 @@ abstract class BaseViewModel<STATE : State, EVENT : Event> : ViewModel() {
 
 interface State
 interface Event
+interface Effect

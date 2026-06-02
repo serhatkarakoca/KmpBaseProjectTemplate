@@ -3,6 +3,7 @@ package com.karakoca.baseproject.presentation.home
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import com.karakoca.baseproject.base.BaseViewModel
+import com.karakoca.baseproject.base.Effect
 import com.karakoca.baseproject.base.Event
 import com.karakoca.baseproject.base.State
 import com.karakoca.baseproject.data.local.AppPreferencesRepository
@@ -18,7 +19,7 @@ class HomeViewModel(
     private val appPreferencesRepository: AppPreferencesRepository,
     private val dao: MovieDao
 ) :
-    BaseViewModel<HomeState, HomeEvent>() {
+    BaseViewModel<HomeState, HomeEvent, HomeEffect>() {
 
     private var page = 1
     override fun setInitialState(): HomeState = HomeState()
@@ -100,3 +101,5 @@ data class HomeState(
 sealed interface HomeEvent : Event {
     data object GetMovies : HomeEvent
 }
+
+sealed interface HomeEffect : Effect

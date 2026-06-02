@@ -2,6 +2,7 @@ package com.karakoca.baseproject.presentation.favorite
 
 import androidx.lifecycle.viewModelScope
 import com.karakoca.baseproject.base.BaseViewModel
+import com.karakoca.baseproject.base.Effect
 import com.karakoca.baseproject.base.Event
 import com.karakoca.baseproject.base.State
 import com.karakoca.baseproject.data.local.database.MovieDao
@@ -9,7 +10,8 @@ import com.karakoca.baseproject.data.model.local.FavMovie
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel(private val dao: MovieDao) : BaseViewModel<FavoriteState, FavoriteEvent>() {
+class FavoriteViewModel(private val dao: MovieDao) :
+    BaseViewModel<FavoriteState, FavoriteEvent, FavoriteEffect>() {
     override fun setInitialState(): FavoriteState {
         return FavoriteState()
     }
@@ -47,3 +49,5 @@ sealed interface FavoriteEvent : Event {
     data object GetFavorites : FavoriteEvent
     data class DeleteFavorite(val item: FavMovie) : FavoriteEvent
 }
+
+sealed interface FavoriteEffect : Effect
